@@ -41,10 +41,50 @@ header {
 main {
     flex: 1;
     display: flex;
+    justify-content: space-between;
+    gap: calc(10px + 10vw);
+    align-items: center;
+}
+
+/* Set symbols styles */
+.pick-symbol {
+    display: flex;
+    flex-direction: column;
+    min-width: 280px;
+    align-items: center;
+    gap: 25px;
+    padding: 20px;
+    background-color: var(--background-color);
+}
+
+.pick-symbol button {
+    color: #fff;
+    font-size: 3rem;
+    border: none;
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+}
+
+#X {
+    background-color: #cc2323;
+}
+
+#X:hover {
+    background-color: #8a1818;
+}
+
+#O {
+    background-color: #2384cc;
+}
+
+#O:hover {
+    background-color: #185a8a;
 }
 
 /* Board styles */
 .board {
+    flex: 0 0 auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -52,21 +92,46 @@ main {
 
     width: 500px;
     height: 500px;
-    margin: auto;
     background-color: #606060;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 805px) {
     .board {
         width: 360px;
         height: 360px;
     }
 }
 
+/* Reset button styles */
+.restart-game {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 280px;
+    gap: 25px;
+}
+
+.restart-game #restart {
+    background-color: #c31f9d;
+    color: #fff;
+    font-size: 1.5rem;
+    border: none;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+}
+
+#restart:hover {
+    background-color: #8a186b;
+}
 
 /* Cell styles */
 .cell {
     border: var(--border);
+}
+
+.cell:hover {
+    background-color: #8baad9;
 }
 
 
