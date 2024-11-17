@@ -1,0 +1,82 @@
+/* Set global styles */
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --background-color: #adadad;
+    --header-background-color: #313131;
+    --text-color: #333;
+    --border-color: #e9ecef;
+    --border: 2px solid #6c757d;
+}
+
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Set global styles */
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--text-color);
+    background-color: var(--background-color);
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Set header styles */
+header {
+    background-color: var(--header-background-color);
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Set main styles */
+main {
+    flex: 1;
+    display: flex;
+}
+
+/* Board styles */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    border: var(--border);
+
+    width: 500px;
+    height: 500px;
+    margin: auto;
+    background-color: #606060;
+}
+
+@media (max-width: 600px) {
+    .board {
+        width: 360px;
+        height: 360px;
+    }
+}
+
+
+/* Cell styles */
+.cell {
+    border: var(--border);
+}
+
+
+/* Footer styles */
+footer {
+    background-color: var(--header-background-color);
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
+
+
