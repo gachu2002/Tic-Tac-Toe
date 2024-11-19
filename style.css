@@ -39,11 +39,21 @@ header {
 
 /* Set main styles */
 main {
+    position: relative;
     flex: 1;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     gap: calc(10px + 10vw);
     align-items: center;
+}
+
+/* Set Result style */
+.result {
+    position: absolute;
+    bottom: 5vh;
+    right: 15vw;
+    font-size: 2rem;
+    font-weight: bold;
 }
 
 /* Set symbols styles */
@@ -92,6 +102,7 @@ main {
 
     width: 500px;
     height: 500px;
+    font-size: 1em;
     background-color: #606060;
 }
 
@@ -144,4 +155,8 @@ footer {
 }
 
 
+/* Set style for js manipulation */
+.disable {
+    display: none;
+}
 
