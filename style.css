@@ -47,15 +47,6 @@ main {
     align-items: center;
 }
 
-/* Set Result style */
-.result {
-    position: absolute;
-    bottom: 5vh;
-    right: 15vw;
-    font-size: 2rem;
-    font-weight: bold;
-}
-
 /* Set symbols styles */
 .pick-symbol {
     display: flex;
@@ -100,10 +91,14 @@ main {
     grid-template-rows: repeat(3, 1fr);
     border: var(--border);
 
-    width: 500px;
-    height: 500px;
-    font-size: 1em;
+    width: 420px;
+    height: 420px;
     background-color: #606060;
+}
+
+.cell {
+    font-size: 80px;
+    text-align: center;
 }
 
 @media (max-width: 805px) {
@@ -111,6 +106,14 @@ main {
         width: 360px;
         height: 360px;
     }
+}
+/* Cell styles */
+.cell {
+    border: var(--border);
+}
+
+.cell:hover {
+    background-color: #8baad9;
 }
 
 /* Reset button styles */
@@ -136,13 +139,12 @@ main {
     background-color: #8a186b;
 }
 
-/* Cell styles */
-.cell {
-    border: var(--border);
-}
 
-.cell:hover {
-    background-color: #8baad9;
+/* Set Result style */
+.result {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
 }
 
 
