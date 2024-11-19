@@ -1,8 +1,9 @@
 const gameBoard = (function(doc){
     const boardElement = doc.querySelector('.board');
     const cellElements = doc.querySelectorAll('.cell');
-    const cells = [];
+    const cells = Array.from(doc.querySelectorAll('.cell'));
     let playerSymbol = '';
+    let isFull = true;
 
     const getPlayerSymbol = () => {
         return playerSymbol;
@@ -12,10 +13,6 @@ const gameBoard = (function(doc){
         playerSymbol = symbol;
     } 
 
-    cellElements.forEach(element => {
-        cells.push(element);
-    });
-
     const disableBoard = () => {
         boardElement.classList.add('disable');
     }
@@ -23,11 +20,8 @@ const gameBoard = (function(doc){
     const enableBoard = () => {
         boardElement.classList.remove('disable');
     }
-
-    // Check the board state - Win or Draw or Continue
-    const getBoardState = () => {
-        let isFull = true;
-
+    // Cut the check board state to small parts
+    const checkRows = () => { 
         for(let i = 0; i < 3; i++){
             if(cells[i].innerText === '') {
                 isFull = false;
@@ -36,7 +30,10 @@ const gameBoard = (function(doc){
             if(cells[i].innerText === cells[i+3].innerText && cells[i].innerText === cells[i+6].innerText) {
                 return cells[i].innerText;
             }
-        }      
+        }   
+        return null;   
+     };
+    const checkColumns = () => { 
         for(let i = 0; i < 9; i+=3){
             if(cells[i].innerText === '') {
                 isFull = false;
@@ -46,13 +43,21 @@ const gameBoard = (function(doc){
                 return cells[i].innerText;
             }
         }
-
+        return null; 
+     };
+    const checkDiagonals = () => { 
         if(cells[0].innerText !== '' && cells[0].innerText === cells[4].innerText && cells[0].innerText === cells[8].innerText) 
             return cells[0].innerText;
         if(cells[2].innerText !== '' && cells[2].innerText === cells[4].innerText && cells[2].innerText === cells[6].innerText) 
             return cells[2].innerText;
+        return null; 
+    };
 
-        return isFull ? "Draw" : "Continue";
+
+    // Check the board state - Win or Draw or Continue
+    const getBoardState = () => {
+        isFull = true;
+        return checkRows() || checkColumns() || checkDiagonals() || (isFull ? "Draw" : "Continue");
     }
 
     const clearBoard = () => {
@@ -103,27 +108,27 @@ const game = (function(doc){
     let turnNum = 0;
     let firstPlayerSymbol = "X";
     let secondPlayerSymbol = "O"; 
+    const resultElement = doc.querySelector('.result>span');
 
     const playGame = () => {
         doc.querySelector('.board').addEventListener('click', (event) => {
             const target = event.target;
             if(target.classList.contains("cell") && target.innerText === '') {
                 if(gameBoard.getBoardState().toLowerCase() === "continue"){
-                    if(turnNum % 2 === 0) gameBoard.setPlayerSymbol(firstPlayerSymbol);
-                    else gameBoard.setPlayerSymbol(secondPlayerSymbol);
+                    gameBoard.setPlayerSymbol(turnNum%2 === 0 ? firstPlayerSymbol : secondPlayerSymbol);
                     target.innerText = gameBoard.getPlayerSymbol();
                     turnNum += 1;
                     console.log(`${turnNum} ${gameBoard.getBoardState()}`);
                 }
                 switch(gameBoard.getBoardState()){
                     case 'Draw':
-                        doc.querySelector('.result>span').innerText = 'DRAW';
+                        resultElement.innerText = 'DRAW';
                         break;
                     case firstPlayerSymbol:
-                        doc.querySelector('.result>span').innerText = "FIRST PLAYER WIN";
+                        resultElement.innerText = "FIRST PLAYER WIN";
                         break;
                     case secondPlayerSymbol:
-                        doc.querySelector('.result>span').innerText = "SECOND PLAYER WIN";
+                        resultElement.innerText = "SECOND PLAYER WIN";
                         break;
                 }     
             }
@@ -135,7 +140,7 @@ const game = (function(doc){
         gameBoard.disableBoard();
         playerMenu.restartPlayerChoice();
         playerMenu.enableMenu();
-        doc.querySelector('.result>span').innerText = '';
+        resultElement.innerText = '';
     }
 
     doc.addEventListener('DOMContentLoaded', () => {
